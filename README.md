@@ -1,6 +1,6 @@
 View factor / area determination for solar flux computations.
 
-Employs orthographic projections. Uses the monogame framework for display.
+Employs orthographic projections. Uses DirectX within the monogame framework for display.
 
 Requires the following inputs
  1. Wavefront file (*.obj, ASCII) of the satellite. Each object within the file
