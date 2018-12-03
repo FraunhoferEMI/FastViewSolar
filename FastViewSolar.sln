@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 15
+VisualStudioVersion = 15.0.28307.136
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FastViewSolar", "FastViewSolar\FastViewSolar.csproj", "{040992AB-D4B3-4227-97F0-0FBE837A4334}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|x86 = Debug|x86
+		Release|x86 = Release|x86
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{040992AB-D4B3-4227-97F0-0FBE837A4334}.Debug|x86.ActiveCfg = Debug|x86
+		{040992AB-D4B3-4227-97F0-0FBE837A4334}.Debug|x86.Build.0 = Debug|x86
+		{040992AB-D4B3-4227-97F0-0FBE837A4334}.Release|x86.ActiveCfg = Release|x86
+		{040992AB-D4B3-4227-97F0-0FBE837A4334}.Release|x86.Build.0 = Release|x86
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {44E71070-0948-43BB-9EE0-271457BBEFB6}
+	EndGlobalSection
+EndGlobal
