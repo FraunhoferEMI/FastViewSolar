@@ -25,7 +25,7 @@
  * The use of this software is only allowed under the terms and condition of the
  * General Public License version 2.0 (GPL 2.0).
  * 
- * Copyright©2018 Gesellschaft zur Foerderung der angewandten Forschung e.V. acting
+ * Copyright©2019 Gesellschaft zur Foerderung der angewandten Forschung e.V. acting
  * on behalf of its Fraunhofer Institut für  Kurzzeitdynamik. All rights reserved.
  * 
  * Contact: max.gulde@emi.fraunhofer.de
@@ -113,6 +113,8 @@ namespace Thermal
             GDM.SynchronizeWithVerticalRetrace = false; // for higher frame rates
             GDM.ApplyChanges();
 
+            PrintSettings();
+
             // setup viewports
             ViewSun = new Viewport(0, 0, Set.ScreenSizePixel, Set.ScreenSizePixel);
 
@@ -126,6 +128,17 @@ namespace Thermal
             IsFixedTimeStep = false;
 
             base.Initialize();
+        }
+
+        void PrintSettings()
+        {
+            if (Set == null)
+            {
+                return;
+            }
+            Tools.ShowMsg("# Satellite parameters");
+            Tools.ShowMsg("\t Altitude = " + Set.Altitude.ToString("F2", Settings.culture) + " km");
+            Tools.ShowMsg("\t Eclipe angle = " + Settings.EclipseAngle.ToString("F2", Settings.culture) + " deg");
         }
 
         #endregion

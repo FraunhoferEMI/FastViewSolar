@@ -13,7 +13,7 @@
  * The use of this software is only allowed under the terms and condition of the
  * General Public License version 2.0 (GPL 2.0).
  * 
- * Copyright©2018 Gesellschaft zur Foerderung der angewandten Forschung e.V. acting
+ * Copyright©2019 Gesellschaft zur Foerderung der angewandten Forschung e.V. acting
  * on behalf of its Fraunhofer Institut für  Kurzzeitdynamik. All rights reserved.
  * 
  * Contact: max.gulde@emi.fraunhofer.de
@@ -75,12 +75,16 @@ namespace Thermal
 
         public void Update()
         {
+            // Check for sun pointing constraint of solar panels
+            Az = Set.FixedSunAz >= 0 ? Set.FixedSunAz : Az;
             // compute position from angles
             Vector3 Position;
-            Position.X = (float)(Math.Cos(MathHelper.ToRadians(El + Set.ElevationOffset)) * Math.Sin(MathHelper.ToRadians(-Az + Set.AzimuthOffset)));
-            Position.Y = (float)(Math.Cos(MathHelper.ToRadians(El + Set.ElevationOffset)) * Math.Cos(MathHelper.ToRadians(-Az + Set.AzimuthOffset)));
-            Position.Z = (float)Math.Sin(MathHelper.ToRadians(El + Set.ElevationOffset));
+            Position.X = (float)(Math.Cos(MathHelper.ToRadians(El)) * Math.Sin(MathHelper.ToRadians(-Az)));
+            Position.Y = (float)(Math.Cos(MathHelper.ToRadians(El)) * Math.Cos(MathHelper.ToRadians(-Az)));
+            Position.Z = (float)Math.Sin(MathHelper.ToRadians(El));
 
+            // Rotate sensor off-nadir
+            World = Matrix.CreateRotationX(MathHelper.ToRadians(-Set.SensorElevationOffset));
             // set view and projection matrices
             View = Matrix.CreateLookAt(Position, Target, Vector3.Forward);
             Projection = Matrix.CreateOrthographic(Size, Size, Settings.NearPlane, Settings.FarPlane);

@@ -13,7 +13,7 @@
  * The use of this software is only allowed under the terms and condition of the
  * General Public License version 2.0 (GPL 2.0).
  * 
- * Copyright©2018 Gesellschaft zur Foerderung der angewandten Forschung e.V. acting
+ * Copyright©2019 Gesellschaft zur Foerderung der angewandten Forschung e.V. acting
  * on behalf of its Fraunhofer Institut für  Kurzzeitdynamik. All rights reserved.
  * 
  * Contact: max.gulde@emi.fraunhofer.de
@@ -127,16 +127,15 @@ namespace Thermal
         public string Name = "ERNST";                       // satellite name
         public float CellEfficiency = 0.3f;                 // efficiency of solar cells
         public int[] SolarCellPartIndex = new int[1] { 0 }; // part index in model
-        public float AzimuthOffset = 0;                     // offset  for azimuth
-        public float ElevationOffset = 0;                   // offset for elevation
+        public float FixedSunAz = 90;                       // (deg) Fixed sun azimuth
+        public float SensorElevationOffset = 30;            // (deg) Offset of the sensor wrt nadir
 
         #endregion
 
         #region orbit
 
         public float Inclination = 51;      // [deg] orbit inclination
-        public float Altitude = 400;        // [km] orbit altitude
-        public float RAAN = 0;              // [deg] RAAN
+        public float Altitude = 500;        // [km] orbit altitude
 
         #endregion
 
@@ -174,7 +173,7 @@ namespace Thermal
         public void Update()
         {
             // set eclipse angle
-            Settings.EclipseAngle = MathHelper.ToDegrees((float)Math.Asin(Settings.EarthRadius / (Settings.EarthRadius + Altitude)));
+            Settings.EclipseAngle = 90 + MathHelper.ToDegrees((float)Math.Acos(Settings.EarthRadius / (Settings.EarthRadius + Altitude)));
 
             string sInc = Inclination.ToString("00", Settings.culture);
 

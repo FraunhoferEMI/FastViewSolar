@@ -13,7 +13,7 @@
  * The use of this software is only allowed under the terms and condition of the
  * General Public License version 2.0 (GPL 2.0).
  * 
- * Copyright©2018 Gesellschaft zur Foerderung der angewandten Forschung e.V. acting
+ * Copyright©2019 Gesellschaft zur Foerderung der angewandten Forschung e.V. acting
  * on behalf of its Fraunhofer Institut für  Kurzzeitdynamik. All rights reserved.
  * 
  * Contact: max.gulde@emi.fraunhofer.de
@@ -86,8 +86,7 @@ namespace Thermal
 
             // evaluate
             int lCount = 0;
-            float Az, Az2, El, Ec;
-            float diff, sum, az, el;
+            float Az, El, Ec;
             foreach (string line in lines)
             {
                 // ignore empty lines
