@@ -28,9 +28,9 @@ namespace Thermal
     public static class Program
     {
         [STAThread]
-        static void Main()
+        static void Main(string[] vs)
         {
-            using (var game = new Main())
+            using (var game = new Main(vs))
                 game.Run();
         }
     }

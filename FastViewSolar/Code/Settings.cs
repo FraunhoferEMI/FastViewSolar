@@ -128,14 +128,7 @@ namespace Thermal
         public float CellEfficiency = 0.3f;                 // efficiency of solar cells
         public int[] SolarCellPartIndex = new int[1] { 0 }; // part index in model
         public float FixedSunAz = 90;                       // (deg) Fixed sun azimuth
-        public float SensorElevationOffset = 30;            // (deg) Offset of the sensor wrt nadir
-
-        #endregion
-
-        #region orbit
-
-        public float Inclination = 51;      // [deg] orbit inclination
-        public float Altitude = 500;        // [km] orbit altitude
+        public float SensorElevationOffset = 0;            // (deg) Offset of the sensor wrt nadir
 
         #endregion
 
@@ -152,12 +145,20 @@ namespace Thermal
 
         #endregion
 
+        #region orbit
+
+        public float Altitude = 500f;
+
+        #endregion
+
         #region files
 
         string fileSuffix = string.Empty;               // Suffix for data files
+        public string BaseFolder = @"C:/";              // Base folder
+        public string InFolder = @"data/";              // Input data directory
+        public string OutFolder = @"results/";          // Results data folder
         public string SatelliteModel = "dummy.obj";     // *.obj file of satellite
-        public string DataFolder = @"C:/data/";         // Input data directory
-        public string ResultsFolder = @"C:/results/";   // Results data folder
+        public string Suffix = "_i98_a500";             // Preferred suffix
         string In_SunAngles = string.Empty;             // Solar angles
         string In_TempSets = string.Empty;              // Temperatures (visualization only)
         string Out_AreaSunView = string.Empty;          // Solar view factors / areas
@@ -175,15 +176,11 @@ namespace Thermal
             // set eclipse angle
             Settings.EclipseAngle = 90 + MathHelper.ToDegrees((float)Math.Acos(Settings.EarthRadius / (Settings.EarthRadius + Altitude)));
 
-            string sInc = Inclination.ToString("00", Settings.culture);
+            In_SunAngles = BaseFolder + InFolder + Name + Suffix + "_SunAngles.csv";
+            In_TempSets = BaseFolder + InFolder + "Temperatur" + Suffix + ".txt";
 
-            fileSuffix = "_i" + sInc + "_a" + Altitude.ToString("000");
-
-            In_SunAngles = DataFolder + Name + fileSuffix + "_SunAngles.csv";
-            In_TempSets = DataFolder + "Temperatur" + fileSuffix + ".txt";
-
-            Out_AreaSunView = ResultsFolder + "Out_AreaSunView" + fileSuffix + ".txt";
-            Out_Power = ResultsFolder + "Out_Power" + fileSuffix + ".txt";
+            Out_AreaSunView = BaseFolder + OutFolder + "Out_AreaSunView" + Suffix + ".txt";
+            Out_Power = BaseFolder + OutFolder + "Out_Power" + Suffix + ".txt";
 
             PixelPerViewport = ScreenSizePixel * ScreenSizePixel;
             PixelArea = ScreenSizeMeter * ScreenSizeMeter / PixelPerViewport;
@@ -215,6 +212,14 @@ namespace Thermal
         public float GetPixelArea()
         {
             return PixelArea;
+        }
+
+        public string DataFolder
+        {
+            get
+            {
+                return BaseFolder + InFolder;
+            }
         }
     }
 

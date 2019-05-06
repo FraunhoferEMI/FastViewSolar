@@ -83,7 +83,7 @@ namespace Thermal
 
         #region init
 
-        public Main()
+        public Main(string[] vs)
         {
             GDM = new GraphicsDeviceManager(this);
             // set graphics profile
@@ -174,7 +174,7 @@ namespace Thermal
         void Reload()
         {
             // load satellite model
-            Sat = new SatModel(this, Set.DataFolder + Set.GetFileName(FileType.SatModel), Set);
+            Sat = new SatModel(this, Set.BaseFolder + Set.GetFileName(FileType.SatModel), Set);
 
             // load angular data
             Dat = new Data(Set);
