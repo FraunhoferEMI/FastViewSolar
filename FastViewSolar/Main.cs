@@ -92,6 +92,17 @@ namespace Thermal
             // set content directory
             Content.RootDirectory = "Content";
 
+            // load settings
+            Set = SettingsRW.LoadXML<UserSettings>(SettingsFile);
+            if (Set == null)
+            {
+                Set = new UserSettings();
+                SettingsRW.SaveXML(Set, SettingsFile);
+
+                Tools.ShowMsg("Did not find settings file, create file with default settings.");
+            }
+            Set.Update();
+
             // Process arguments
             foreach (string s in vs)
             {
@@ -102,24 +113,16 @@ namespace Thermal
                 {
                     SimIsRunning = true;
                     AutomaticStartEnd = true;
-                    Tools.ShowMsg("Automatic starting enabled.");
+                }
+                if (string.Compare(Command, "NoWrite", true) == 0)
+                {
+                    Set.WriteData = false;
                 }
             }
         }
 
         protected override void Initialize()
-        {
-            // load settings
-            Set = SettingsRW.LoadXML<UserSettings>(SettingsFile);
-            if (Set == null)
-            {
-                Set = new UserSettings();
-                SettingsRW.SaveXML(Set, SettingsFile);
-               
-                Tools.ShowMsg("Did not find settings file, create file with default settings.");
-            }
-            Set.Update();
-            
+        {            
             // set screen resolution
             Tools.ShowMsg("Initializing.");
             Tools.ShowMsg("Pixel size is <" + Set.GetPixelArea() + "> m^2.");
