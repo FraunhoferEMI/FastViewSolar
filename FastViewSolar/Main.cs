@@ -90,6 +90,19 @@ namespace Thermal
             GDM.GraphicsProfile = GraphicsProfile.HiDef;
             // set content directory
             Content.RootDirectory = "Content";
+
+            // Process arguments
+            foreach (string s in vs)
+            {
+                string Command = s.Trim();
+                if (string.IsNullOrEmpty(Command))
+                    continue;
+                if (string.Compare(Command,"StartSim",true) == 0)
+                {
+                    SimIsRunning = true;
+                    Tools.ShowMsg("Automatic starting enabled.");
+                }
+            }
         }
 
         protected override void Initialize()
