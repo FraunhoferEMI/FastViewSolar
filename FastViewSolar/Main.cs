@@ -65,6 +65,7 @@ namespace Thermal
         Text TXT;
         Point MouseOldPosition;
         bool SimIsRunning = false;
+        bool AutomaticStartEnd = false;
         bool SimIsOver = false;
         bool OrientationChanged = false;
 
@@ -100,6 +101,7 @@ namespace Thermal
                 if (string.Compare(Command,"StartSim",true) == 0)
                 {
                     SimIsRunning = true;
+                    AutomaticStartEnd = true;
                     Tools.ShowMsg("Automatic starting enabled.");
                 }
             }
@@ -422,6 +424,11 @@ namespace Thermal
                         // write remaining data
                         Dat.WriteToFile(DataType.Area, true);
                         Dat.WriteToFile(DataType.Power, true);
+                        // If automatic start, also automatic end
+                        if (AutomaticStartEnd)
+                        {
+                            Exit();
+                        }
                     }
                 }
                 // (3b) otherwise display in console
