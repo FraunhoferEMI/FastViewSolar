@@ -236,6 +236,12 @@ namespace Thermal
                 }
             }
             Tools.ShowMsg("Loading " + oCounter + " parts.");
+            if (oCounter == 0)
+            {
+                Tools.ShowError("Model has no parts. Aborting.");
+                var Line = Console.ReadLine();
+                return;
+            }
             // make color list
             MakeColorList(oCounter);
 
